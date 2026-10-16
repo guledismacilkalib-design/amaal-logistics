@@ -1,108 +1,137 @@
 <!DOCTYPE html><html lang="so">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#063b2c">
-  <title>Amaal Logistics</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f2f6f4;
-      color: #18352c;
-    }
-    header {
-      background: #063b2c;
-      color: white;
-      padding: 25px 18px;
-      text-align: center;
-    }
-    header h1 { margin: 0 0 8px; }
-    header p { margin: 0; }
-    main {
-      max-width: 850px;
-      margin: auto;
-      padding: 20px;
-    }
-    .welcome {
-      background: white;
-      padding: 22px;
-      border-radius: 14px;
-      margin-bottom: 20px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-      gap: 14px;
-    }
-    .card {
-      background: white;
-      padding: 20px 12px;
-      border-radius: 14px;
-      text-align: center;
-      box-shadow: 0 2px 8px #0000000d;
-    }
-    .icon { font-size: 38px; }
-    .card h3 { margin: 10px 0 6px; }
-    .card p { font-size: 14px; color: #587067; }
-    button {
-      background: #087f5b;
-      color: white;
-      border: 0;
-      padding: 12px 18px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    footer {
-      text-align: center;
-      padding: 22px;
-      color: #587067;
-      font-size: 13px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#073b2c">
+<link rel="manifest" href="./manifest.json">
+<title>Amaal Logistics</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f7f5;color:#19382d}
+header{background:#073b2c;color:white;padding:22px 16px;text-align:center}
+header h1{margin:0;font-size:27px}
+header p{margin:8px 0 0}
+nav{display:flex;gap:8px;overflow-x:auto;padding:12px;background:white;position:sticky;top:0}
+nav button{white-space:nowrap;border:0;background:#e6f2ec;padding:11px 14px;border-radius:9px;color:#073b2c;font-weight:bold}
+main{max-width:850px;margin:auto;padding:18px}
+.hero{background:#0b684b;color:white;padding:24px;border-radius:16px;margin-bottom:20px}
+.hero h2{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.card{background:white;padding:17px 12px;border-radius:14px;text-align:center;box-shadow:0 2px 8px #0000000a}
+.card .icon{font-size:38px}
+.card h3{margin:10px 0 6px}
+.card p{font-size:13px;color:#60766c;line-height:1.5}
+button.action{background:#087f5b;color:white;border:0;padding:12px;border-radius:9px;font-weight:bold;width:100%}
+.page{display:none;background:white;padding:20px;border-radius:14px;margin-top:18px}
+.page.active{display:block}
+label{display:block;margin-top:12px;font-weight:bold}
+input,select,textarea{width:100%;padding:12px;margin-top:6px;border:1px solid #ccd9d1;border-radius:8px;font-size:16px}
+footer{text-align:center;padding:24px;color:#66786f;font-size:13px}
+</style>
 </head>
 <body>
-  <header>
-    <h1>🚚 Amaal Logistics</h1>
-    <p>Gaadiid iyo gaarsiin casri ah</p>
-  </header>  <main>
-    <section class="welcome">
-      <h2>Ku soo dhawoow Amaal Logistics</h2>
-      <p>Dooro adeegga aad u baahan tahay.</p>
-      <button onclick="alert('Adeegyada Amaal Logistics')">
-        Eeg Adeegyada
-      </button>
-    </section><h2>Adeegyadayada</h2>
-<section class="grid">
-  <div class="card">
-    <div class="icon">🚕</div>
-    <h3>Taxi</h3>
-    <p>Gaadiid rakaab. Qiimaha waxaa lagu salayn doonaa masaafada.</p>
-  </div>
-
-  <div class="card">
-    <div class="icon">🚐</div>
-    <h3>City Delivery</h3>
-    <p>Gaarsiin alaab iyo badeecooyin gudaha magaalada.</p>
-  </div>
-
-  <div class="card">
-    <div class="icon">🚛</div>
-    <h3>Heavy Cargo</h3>
-    <p>Gaadiidka xamuulka culus.</p>
-  </div>
-
-  <div class="card">
-    <div class="icon">🏍️</div>
-    <h3>Fast Delivery</h3>
-    <p>Mootooyin iyo baaskiillo loogu talagalay gaarsiin degdeg ah.</p>
-  </div>
+<header>
+<h1>🚚 Amaal Logistics</h1>
+<p>Gaadiid iyo gaarsiin casri ah</p>
+</header><nav>
+<button onclick="showPage('home')">🏠 Home</button>
+<button onclick="showPage('taxi')">🚕 Taxi</button>
+<button onclick="showPage('city')">🚐 City Delivery</button>
+<button onclick="showPage('cargo')">🚛 Heavy Cargo</button>
+<button onclick="showPage('fast')">🏍️ Fast Delivery</button>
+<button onclick="showPage('track')">📦 Dalabkayga</button>
+</nav><main>
+<section id="home" class="page active" style="display:block">
+<div class="hero">
+<h2>Ku soo dhawoow Amaal Logistics</h2>
+<p>Dooro adeegga aad u baahan tahay. Waxaan kuu fududaynaynaa gaadiidka iyo gaarsiinta alaabta.</p>
+<button class="action" onclick="showPage('taxi')">Bilow Dalabka</button>
+</div>
+<h2>Adeegyadayada</h2>
+<div class="grid">
+<div class="card"><div class="icon">🚕</div><h3>Taxi</h3><p>Gaadiid rakaab oo qiimaha lagu xisaabiyo masaafada.</p><button class="action" onclick="showPage('taxi')">Dooro Taxi</button></div>
+<div class="card"><div class="icon">🚐</div><h3>City Delivery</h3><p>Gaarsiin alaab iyo badeecooyin gudaha magaalada.</p><button class="action" onclick="showPage('city')">Dalbo Gaarsiin</button></div>
+<div class="card"><div class="icon">🚛</div><h3>Heavy Cargo</h3><p>Gaadiid loogu talagalay xamuulka culus.</p><button class="action" onclick="showPage('cargo')">Dalbo Xamuul</button></div>
+<div class="card"><div class="icon">🏍️</div><h3>Fast Delivery</h3><p>Mootooyin iyo baaskiillo loogu talagalay gaarsiin degdeg ah.</p><button class="action" onclick="showPage('fast')">Dalbo Degdeg</button></div>
+</div>
+</section><section id="taxi" class="page">
+<h2>🚕 Dalbo Taxi</h2>
+<p>Geli masaafada si aad u aragto qiime tusaale ah.</p>
+<label>Masaafada (km)</label><input id="taxiKm" type="number" min="1" placeholder="Tusaale: 5">
+<label>Qiimaha halkii km</label><input id="taxiRate" type="number" min="0" placeholder="Geli qiimaha lacagta deegaanka">
+<button class="action" onclick="calculateTaxi()">Xisaabi Qiimaha</button>
+<p id="taxiResult"></p>
+<p>Fiiro gaar ah: tani waa xisaab tusaale ah; wali kuma xirna darawallo ama nidaam lacag-bixin.</p>
+</section><section id="city" class="page">
+<h2>🚐 City Delivery</h2>
+<label>Magacaaga</label><input id="cityName" placeholder="Magaca macmiilka">
+<label>Telefoonka</label><input id="cityPhone" type="tel" placeholder="Lambarka telefoonka">
+<label>Meesha alaabta laga qaadayo</label><input id="cityFrom" placeholder="Cinwaanka qaadista">
+<label>Meesha la geynayo</label><input id="cityTo" placeholder="Cinwaanka gaarsiinta">
+<label>Faahfaahinta alaabta</label><textarea id="cityItem" placeholder="Maxaa la gaarsiinayaa?"></textarea>
+<button class="action" onclick="saveOrder('city')">Diyaari Dalabka</button>
+</section><section id="cargo" class="page">
+<h2>🚛 Heavy Cargo</h2>
+<label>Magacaaga</label><input id="cargoName" placeholder="Magaca macmiilka">
+<label>Telefoonka</label><input id="cargoPhone" type="tel" placeholder="Lambarka telefoonka">
+<label>Meesha laga qaadayo</label><input id="cargoFrom" placeholder="Cinwaanka qaadista">
+<label>Meesha la geynayo</label><input id="cargoTo" placeholder="Cinwaanka gaarsiinta">
+<label>Nooca xamuulka</label><textarea id="cargoItem" placeholder="Sharax xamuulka iyo miisaankiisa"></textarea>
+<button class="action" onclick="saveOrder('cargo')">Diyaari Dalabka</button>
+</section><section id="fast" class="page">
+<h2>🏍️ Fast Delivery</h2>
+<label>Magacaaga</label><input id="fastName" placeholder="Magaca macmiilka">
+<label>Telefoonka</label><input id="fastPhone" type="tel" placeholder="Lambarka telefoonka">
+<label>Meesha laga qaadayo</label><input id="fastFrom" placeholder="Cinwaanka qaadista">
+<label>Meesha la geynayo</label><input id="fastTo" placeholder="Cinwaanka gaarsiinta">
+<label>Nooca gaadiidka</label><select id="fastVehicle"><option>Mooto</option><option>Baaskiil</option></select>
+<label>Faahfaahinta alaabta</label><textarea id="fastItem" placeholder="Sharax alaabta"></textarea>
+<button class="action" onclick="saveOrder('fast')">Diyaari Dalabka</button>
+</section><section id="track" class="page">
+<h2>📦 Dalabkayga</h2>
+<p>Dalabyada aad ku diyaarisay qalabkan waxay ka muuqan karaan halkan.</p>
+<div id="ordersList"></div>
 </section>
-
-  </main>  <footer>
-    © 2026 Amaal Logistics — Adeeg hufan oo casri ah.
-  </footer>
-</body>
+</main><footer>© 2026 Amaal Logistics</footer><script>
+function showPage(id){
+document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.style.display='none'});
+const page=document.getElementById(id);
+if(page){page.classList.add('active');page.style.display='block'}
+window.scrollTo(0,0);
+if(id==='track')renderOrders();
+}
+function calculateTaxi(){
+const km=Number(document.getElementById('taxiKm').value);
+const rate=Number(document.getElementById('taxiRate').value);
+if(km<=0||rate<0||document.getElementById('taxiRate').value===''){
+document.getElementById('taxiResult').textContent='Fadlan geli masaafada iyo qiimaha halkii km.';
+return;
+}
+document.getElementById('taxiResult').textContent='Qiimaha tusaalaha ah: '+(km*rate).toLocaleString()+' (lacagta deegaanka).';
+}
+function saveOrder(type){
+const fields={
+city:['cityName','cityPhone','cityFrom','cityTo','cityItem'],
+cargo:['cargoName','cargoPhone','cargoFrom','cargoTo','cargoItem'],
+fast:['fastName','fastPhone','fastFrom','fastTo','fastItem']
+}[type];
+const vals=fields.map(id=>document.getElementById(id).value.trim());
+if(vals.some(v=>!v)){alert('Fadlan buuxi dhammaan meelaha.');return}
+const order={id:'AM'+Date.now().toString().slice(-8),type:type,values:vals,vehicle:type==='fast'?document.getElementById('fastVehicle').value:'',date:new Date().toLocaleString()};
+const orders=JSON.parse(localStorage.getItem('amaalOrders')||'[]');
+orders.unshift(order);
+localStorage.setItem('amaalOrders',JSON.stringify(orders));
+alert('Dalabka waxaa lagu kaydiyey qalabkan. Lambarka dalabka: '+order.id+'. Weli looma dirin shirkadda.');
+fields.forEach(id=>document.getElementById(id).value='');
+}
+function renderOrders(){
+const orders=JSON.parse(localStorage.getItem('amaalOrders')||'[]');
+const box=document.getElementById('ordersList');
+if(!orders.length){box.textContent='Weli dalab laguma kaydin qalabkan.';return}
+box.innerHTML=orders.map(o=>'<div class="card" style="margin:10px 0;text-align:left"><b>Dalab: '+o.id+'</b><p>Qaybta: '+o.type+'</p><p>Taariikh: '+o.date+'</p><p>Meel laga qaadayo: '+o.values[2]+'</p><p>Meel la geynayo: '+o.values[3]+'</p></div>').join('');
+}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script></body>
 </html>
