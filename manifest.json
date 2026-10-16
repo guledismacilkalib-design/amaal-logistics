@@ -1,0 +1,12 @@
+{
+"name": "Amaal Logistics",
+"short_name": "Amaal",
+"description": "Gaadiid, taxi iyo adeegyada gaarsiinta alaabta.",
+"start_url": "./index.html",
+"scope": "./",
+"display": "standalone",
+"background_color": "#f2f6f4",
+"theme_color": "#063b2c",
+"orientation": "portrait",
+"lang": "so"
+}
