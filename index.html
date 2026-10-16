@@ -8,130 +8,311 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f3f7f5;color:#19382d}
-header{background:#073b2c;color:white;padding:22px 16px;text-align:center}
+header{background:#073b2c;color:white;padding:22px 15px;text-align:center}
 header h1{margin:0;font-size:27px}
-header p{margin:8px 0 0}
-nav{display:flex;gap:8px;overflow-x:auto;padding:12px;background:white;position:sticky;top:0}
-nav button{white-space:nowrap;border:0;background:#e6f2ec;padding:11px 14px;border-radius:9px;color:#073b2c;font-weight:bold}
-main{max-width:850px;margin:auto;padding:18px}
+header p{margin:8px 0}
+.language{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:14px;background:white}
+.language select{width:auto;max-width:100%;padding:10px;border:1px solid #ccd9d1;border-radius:8px;font-size:15px}
+nav{display:flex;gap:8px;overflow-x:auto;padding:12px;background:#e6f2ec;position:sticky;top:0;z-index:5}
+nav button{white-space:nowrap;border:0;background:white;padding:11px 14px;border-radius:9px;color:#073b2c;font-weight:bold}
+main{max-width:900px;margin:auto;padding:18px}
 .hero{background:#0b684b;color:white;padding:24px;border-radius:16px;margin-bottom:20px}
 .hero h2{margin-top:0}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
 .card{background:white;padding:17px 12px;border-radius:14px;text-align:center;box-shadow:0 2px 8px #0000000a}
-.card .icon{font-size:38px}
+.icon{font-size:38px}
 .card h3{margin:10px 0 6px}
 .card p{font-size:13px;color:#60766c;line-height:1.5}
-button.action{background:#087f5b;color:white;border:0;padding:12px;border-radius:9px;font-weight:bold;width:100%}
+button.action{background:#087f5b;color:white;border:0;padding:12px;border-radius:9px;font-weight:bold;width:100%;cursor:pointer}
 .page{display:none;background:white;padding:20px;border-radius:14px;margin-top:18px}
 .page.active{display:block}
 label{display:block;margin-top:12px;font-weight:bold}
 input,select,textarea{width:100%;padding:12px;margin-top:6px;border:1px solid #ccd9d1;border-radius:8px;font-size:16px}
+.note{font-size:13px;line-height:1.5;color:#60766c}
 footer{text-align:center;padding:24px;color:#66786f;font-size:13px}
+@media(max-width:400px){main{padding:12px}.grid{gap:9px}.card{padding:14px 9px}}
 </style>
 </head>
-<body>
-<header>
+<body><header>
 <h1>🚚 Amaal Logistics</h1>
-<p>Gaadiid iyo gaarsiin casri ah</p>
-</header><nav>
-<button onclick="showPage('home')">🏠 Home</button>
-<button onclick="showPage('taxi')">🚕 Taxi</button>
-<button onclick="showPage('city')">🚐 City Delivery</button>
-<button onclick="showPage('cargo')">🚛 Heavy Cargo</button>
-<button onclick="showPage('fast')">🏍️ Fast Delivery</button>
-<button onclick="showPage('track')">📦 Dalabkayga</button>
+<p data-i18n="tagline">Gaadiid iyo gaarsiin casri ah</p>
+</header><div class="language">
+<label for="languageSelect" data-i18n="chooseLanguage">Dooro luqadda:</label>
+<select id="languageSelect" onchange="changeLanguage(this.value)">
+<option value="en">🇬🇧 English</option>
+<option value="am">🇪🇹 አማርኛ</option>
+<option value="so">🇸🇴 Soomaali</option>
+<option value="om">🇪🇹 Afaan Oromoo</option>
+</select>
+</div><nav>
+<button onclick="showPage('home')" data-i18n="home">🏠 Home</button>
+<button onclick="showPage('taxi')" data-i18n="taxiNav">🚕 Taxi</button>
+<button onclick="showPage('city')" data-i18n="cityNav">🚐 City Delivery</button>
+<button onclick="showPage('cargo')" data-i18n="cargoNav">🚛 Heavy Cargo</button>
+<button onclick="showPage('fast')" data-i18n="fastNav">🏍️ Fast Delivery</button>
+<button onclick="showPage('track')" data-i18n="ordersNav">📦 My Orders</button>
 </nav><main>
 <section id="home" class="page active" style="display:block">
 <div class="hero">
-<h2>Ku soo dhawoow Amaal Logistics</h2>
-<p>Dooro adeegga aad u baahan tahay. Waxaan kuu fududaynaynaa gaadiidka iyo gaarsiinta alaabta.</p>
-<button class="action" onclick="showPage('taxi')">Bilow Dalabka</button>
-</div>
-<h2>Adeegyadayada</h2>
+<h2 data-i18n="welcome">Ku soo dhawoow Amaal Logistics</h2>
+<p data-i18n="welcomeText">Dooro adeegga aad u baahan tahay. Waxaan kuu fududaynaynaa gaadiidka iyo gaarsiinta alaabta.</p>
+<button class="action" onclick="showPage('taxi')" data-i18n="startOrder">Bilow Dalabka</button>
+</div><h2 data-i18n="ourServices">Adeegyadayada</h2>
 <div class="grid">
-<div class="card"><div class="icon">🚕</div><h3>Taxi</h3><p>Gaadiid rakaab oo qiimaha lagu xisaabiyo masaafada.</p><button class="action" onclick="showPage('taxi')">Dooro Taxi</button></div>
-<div class="card"><div class="icon">🚐</div><h3>City Delivery</h3><p>Gaarsiin alaab iyo badeecooyin gudaha magaalada.</p><button class="action" onclick="showPage('city')">Dalbo Gaarsiin</button></div>
-<div class="card"><div class="icon">🚛</div><h3>Heavy Cargo</h3><p>Gaadiid loogu talagalay xamuulka culus.</p><button class="action" onclick="showPage('cargo')">Dalbo Xamuul</button></div>
-<div class="card"><div class="icon">🏍️</div><h3>Fast Delivery</h3><p>Mootooyin iyo baaskiillo loogu talagalay gaarsiin degdeg ah.</p><button class="action" onclick="showPage('fast')">Dalbo Degdeg</button></div>
+<div class="card">
+<div class="icon">🚕</div>
+<h3 data-i18n="taxiTitle">Taxi</h3>
+<p data-i18n="taxiDesc">Gaadiid rakaab oo qiimaha lagu xisaabiyo masaafada.</p>
+<button class="action" onclick="showPage('taxi')" data-i18n="chooseTaxi">Dooro Taxi</button>
+</div>
+<div class="card">
+<div class="icon">🚐</div>
+<h3 data-i18n="cityTitle">City Delivery</h3>
+<p data-i18n="cityDesc">Gaarsiin alaab iyo badeecooyin gudaha magaalada.</p>
+<button class="action" onclick="showPage('city')" data-i18n="orderDelivery">Dalbo Gaarsiin</button>
+</div>
+<div class="card">
+<div class="icon">🚛</div>
+<h3 data-i18n="cargoTitle">Heavy Cargo</h3>
+<p data-i18n="cargoDesc">Gaadiid loogu talagalay xamuulka culus.</p>
+<button class="action" onclick="showPage('cargo')" data-i18n="orderCargo">Dalbo Xamuul</button>
+</div>
+<div class="card">
+<div class="icon">🏍️</div>
+<h3 data-i18n="fastTitle">Fast Delivery</h3>
+<p data-i18n="fastDesc">Mootooyin iyo baaskiillo loogu talagalay gaarsiin degdeg ah.</p>
+<button class="action" onclick="showPage('fast')" data-i18n="orderFast">Dalbo Degdeg</button>
+</div>
 </div>
 </section><section id="taxi" class="page">
-<h2>🚕 Dalbo Taxi</h2>
-<p>Geli masaafada si aad u aragto qiime tusaale ah.</p>
-<label>Masaafada (km)</label><input id="taxiKm" type="number" min="1" placeholder="Tusaale: 5">
-<label>Qiimaha halkii km</label><input id="taxiRate" type="number" min="0" placeholder="Geli qiimaha lacagta deegaanka">
-<button class="action" onclick="calculateTaxi()">Xisaabi Qiimaha</button>
-<p id="taxiResult"></p>
-<p>Fiiro gaar ah: tani waa xisaab tusaale ah; wali kuma xirna darawallo ama nidaam lacag-bixin.</p>
+<h2 data-i18n="taxiHeading">🚕 Dalbo Taxi</h2>
+<p data-i18n="taxiInstructions">Geli masaafada iyo qiimaha halkii kiiloomitir si aad u hesho qiyaasta qiimaha.</p>
+<label for="taxiKm" data-i18n="distance">Masaafada (km)</label>
+<input id="taxiKm" type="number" min="0.1" step="0.1" placeholder="5">
+<label for="taxiRate" data-i18n="pricePerKm">Qiimaha halkii km</label>
+<input id="taxiRate" type="number" min="0" step="0.01" placeholder="10">
+<button class="action" onclick="calculateTaxi()" data-i18n="calculate">Xisaabi Qiimaha</button>
+<p id="taxiResult" aria-live="polite"></p>
+<p class="note" data-i18n="taxiNote">Qiimahani waa qiyaas tusaale ah. Weli kuma xirna nidaam qiimeyn ama lacag-bixin rasmi ah.</p>
 </section><section id="city" class="page">
-<h2>🚐 City Delivery</h2>
-<label>Magacaaga</label><input id="cityName" placeholder="Magaca macmiilka">
-<label>Telefoonka</label><input id="cityPhone" type="tel" placeholder="Lambarka telefoonka">
-<label>Meesha alaabta laga qaadayo</label><input id="cityFrom" placeholder="Cinwaanka qaadista">
-<label>Meesha la geynayo</label><input id="cityTo" placeholder="Cinwaanka gaarsiinta">
-<label>Faahfaahinta alaabta</label><textarea id="cityItem" placeholder="Maxaa la gaarsiinayaa?"></textarea>
-<button class="action" onclick="saveOrder('city')">Diyaari Dalabka</button>
+<h2 data-i18n="cityHeading">🚐 City Delivery</h2>
+<label for="cityName" data-i18n="customerName">Magaca macmiilka</label>
+<input id="cityName" data-i18n-placeholder="customerNamePlaceholder" placeholder="Magacaaga">
+<label for="cityPhone" data-i18n="phone">Telefoonka</label>
+<input id="cityPhone" type="tel" placeholder="+251...">
+<label for="cityFrom" data-i18n="pickup">Meesha laga qaadayo</label>
+<input id="cityFrom" data-i18n-placeholder="pickupPlaceholder" placeholder="Cinwaanka qaadista">
+<label for="cityTo" data-i18n="destination">Meesha la geynayo</label>
+<input id="cityTo" data-i18n-placeholder="destinationPlaceholder" placeholder="Cinwaanka gaarsiinta">
+<label for="cityItem" data-i18n="itemDetails">Faahfaahinta alaabta</label>
+<textarea id="cityItem" data-i18n-placeholder="itemPlaceholder" placeholder="Sharax alaabta"></textarea>
+<button class="action" onclick="saveOrder('city')" data-i18n="prepareOrder">Diyaari Dalabka</button>
 </section><section id="cargo" class="page">
-<h2>🚛 Heavy Cargo</h2>
-<label>Magacaaga</label><input id="cargoName" placeholder="Magaca macmiilka">
-<label>Telefoonka</label><input id="cargoPhone" type="tel" placeholder="Lambarka telefoonka">
-<label>Meesha laga qaadayo</label><input id="cargoFrom" placeholder="Cinwaanka qaadista">
-<label>Meesha la geynayo</label><input id="cargoTo" placeholder="Cinwaanka gaarsiinta">
-<label>Nooca xamuulka</label><textarea id="cargoItem" placeholder="Sharax xamuulka iyo miisaankiisa"></textarea>
-<button class="action" onclick="saveOrder('cargo')">Diyaari Dalabka</button>
+<h2 data-i18n="cargoHeading">🚛 Heavy Cargo</h2>
+<label for="cargoName" data-i18n="customerName">Magaca macmiilka</label>
+<input id="cargoName" data-i18n-placeholder="customerNamePlaceholder" placeholder="Magacaaga">
+<label for="cargoPhone" data-i18n="phone">Telefoonka</label>
+<input id="cargoPhone" type="tel" placeholder="+251...">
+<label for="cargoFrom" data-i18n="pickup">Meesha laga qaadayo</label>
+<input id="cargoFrom" data-i18n-placeholder="pickupPlaceholder" placeholder="Cinwaanka qaadista">
+<label for="cargoTo" data-i18n="destination">Meesha la geynayo</label>
+<input id="cargoTo" data-i18n-placeholder="destinationPlaceholder" placeholder="Cinwaanka gaarsiinta">
+<label for="cargoItem" data-i18n="cargoDetails">Sharaxaadda xamuulka</label>
+<textarea id="cargoItem" data-i18n-placeholder="cargoPlaceholder" placeholder="Nooca iyo miisaanka xamuulka"></textarea>
+<button class="action" onclick="saveOrder('cargo')" data-i18n="prepareOrder">Diyaari Dalabka</button>
 </section><section id="fast" class="page">
-<h2>🏍️ Fast Delivery</h2>
-<label>Magacaaga</label><input id="fastName" placeholder="Magaca macmiilka">
-<label>Telefoonka</label><input id="fastPhone" type="tel" placeholder="Lambarka telefoonka">
-<label>Meesha laga qaadayo</label><input id="fastFrom" placeholder="Cinwaanka qaadista">
-<label>Meesha la geynayo</label><input id="fastTo" placeholder="Cinwaanka gaarsiinta">
-<label>Nooca gaadiidka</label><select id="fastVehicle"><option>Mooto</option><option>Baaskiil</option></select>
-<label>Faahfaahinta alaabta</label><textarea id="fastItem" placeholder="Sharax alaabta"></textarea>
-<button class="action" onclick="saveOrder('fast')">Diyaari Dalabka</button>
+<h2 data-i18n="fastHeading">🏍️ Fast Delivery</h2>
+<label for="fastName" data-i18n="customerName">Magaca macmiilka</label>
+<input id="fastName" data-i18n-placeholder="customerNamePlaceholder" placeholder="Magacaaga">
+<label for="fastPhone" data-i18n="phone">Telefoonka</label>
+<input id="fastPhone" type="tel" placeholder="+251...">
+<label for="fastFrom" data-i18n="pickup">Meesha laga qaadayo</label>
+<input id="fastFrom" data-i18n-placeholder="pickupPlaceholder" placeholder="Cinwaanka qaadista">
+<label for="fastTo" data-i18n="destination">Meesha la geynayo</label>
+<input id="fastTo" data-i18n-placeholder="destinationPlaceholder" placeholder="Cinwaanka gaarsiinta">
+<label for="fastVehicle" data-i18n="vehicleType">Nooca gaadiidka</label>
+<select id="fastVehicle">
+<option value="motorcycle" data-i18n="motorcycle">Mooto</option>
+<option value="bicycle" data-i18n="bicycle">Baaskiil</option>
+</select>
+<label for="fastItem" data-i18n="itemDetails">Faahfaahinta alaabta</label>
+<textarea id="fastItem" data-i18n-placeholder="itemPlaceholder" placeholder="Sharax alaabta"></textarea>
+<button class="action" onclick="saveOrder('fast')" data-i18n="prepareOrder">Diyaari Dalabka</button>
 </section><section id="track" class="page">
-<h2>📦 Dalabkayga</h2>
-<p>Dalabyada aad ku diyaarisay qalabkan waxay ka muuqan karaan halkan.</p>
+<h2 data-i18n="ordersHeading">📦 Dalabyadayda</h2>
+<p data-i18n="ordersInfo">Dalabyada lagu kaydiyey browser-kan ayaa halkan ka muuqanaya.</p>
 <div id="ordersList"></div>
 </section>
 </main><footer>© 2026 Amaal Logistics</footer><script>
-function showPage(id){
-document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.style.display='none'});
-const page=document.getElementById(id);
-if(page){page.classList.add('active');page.style.display='block'}
-window.scrollTo(0,0);
-if(id==='track')renderOrders();
+const translations = {
+en: {
+tagline:"Modern transport and delivery services",chooseLanguage:"Choose language:",
+home:"🏠 Home",taxiNav:"🚕 Taxi",cityNav:"🚐 City Delivery",cargoNav:"🚛 Heavy Cargo",fastNav:"🏍️ Fast Delivery",ordersNav:"📦 My Orders",
+welcome:"Welcome to Amaal Logistics",welcomeText:"Choose the service you need. We make transport and delivery easier.",startOrder:"Start an Order",ourServices:"Our Services",
+taxiTitle:"Taxi",taxiDesc:"Passenger transport with distance-based pricing.",chooseTaxi:"Choose Taxi",cityTitle:"City Delivery",cityDesc:"Delivery of goods and products within the city.",orderDelivery:"Order Delivery",cargoTitle:"Heavy Cargo",cargoDesc:"Transport for heavy cargo.",orderCargo:"Order Cargo",fastTitle:"Fast Delivery",fastDesc:"Motorcycles and bicycles for fast delivery.",orderFast:"Order Fast Delivery",
+taxiHeading:"🚕 Order a Taxi",taxiInstructions:"Enter the distance and price per kilometre to estimate the fare.",distance:"Distance (km)",pricePerKm:"Price per km",calculate:"Calculate Fare",taxiNote:"This is an example estimate. It is not connected to a live fare or payment system.",customerName:"Customer name",customerNamePlaceholder:"Your name",phone:"Phone number",pickup:"Pickup location",pickupPlaceholder:"Pickup address",destination:"Delivery destination",destinationPlaceholder:"Destination address",itemDetails:"Item details",itemPlaceholder:"Describe the item",prepareOrder:"Prepare Order",cityHeading:"🚐 City Delivery",cargoHeading:"🚛 Heavy Cargo",cargoDetails:"Cargo description",cargoPlaceholder:"Cargo type and weight",fastHeading:"🏍️ Fast Delivery",vehicleType:"Vehicle type",motorcycle:"Motorcycle",bicycle:"Bicycle",ordersHeading:"📦 My Orders",ordersInfo:"Orders saved in this browser appear here.",
+enterDistanceAndRate:"Please enter a valid distance and price per kilometre.",estimatedFare:"Estimated fare: ",fillAll:"Please complete all fields.",savedLocally:"Order saved on this device. Order number: ",notSent:" It has not been sent to the company.",noOrders:"No orders have been saved in this browser.",orderNumber:"Order number: ",service:"Service: ",date:"Date: ",pickupLabel:"Pickup: ",destinationLabel:"Destination: ",vehicle:"Vehicle: "
+},
+so: {
+tagline:"Gaadiid iyo gaarsiin casri ah",chooseLanguage:"Dooro luqadda:",
+home:"🏠 Home",taxiNav:"🚕 Taxi",cityNav:"🚐 City Delivery",cargoNav:"🚛 Heavy Cargo",fastNav:"🏍️ Fast Delivery",ordersNav:"📦 Dalabkayga",
+welcome:"Ku soo dhawoow Amaal Logistics",welcomeText:"Dooro adeegga aad u baahan tahay. Waxaan kuu fududaynaynaa gaadiidka iyo gaarsiinta alaabta.",startOrder:"Bilow Dalabka",ourServices:"Adeegyadayada",
+taxiTitle:"Taxi",taxiDesc:"Gaadiid rakaab oo qiimaha lagu xisaabiyo masaafada.",chooseTaxi:"Dooro Taxi",cityTitle:"City Delivery",cityDesc:"Gaarsiin alaab iyo badeecooyin gudaha magaalada.",orderDelivery:"Dalbo Gaarsiin",cargoTitle:"Heavy Cargo",cargoDesc:"Gaadiid loogu talagalay xamuulka culus.",orderCargo:"Dalbo Xamuul",fastTitle:"Fast Delivery",fastDesc:"Mootooyin iyo baaskiillo loogu talagalay gaarsiin degdeg ah.",orderFast:"Dalbo Degdeg",
+taxiHeading:"🚕 Dalbo Taxi",taxiInstructions:"Geli masaafada iyo qiimaha halkii kiiloomitir si aad u hesho qiyaasta qiimaha.",distance:"Masaafada (km)",pricePerKm:"Qiimaha halkii km",calculate:"Xisaabi Qiimaha",taxiNote:"Qiimahani waa qiyaas tusaale ah. Kuma xirna nidaam qiimeyn ama lacag-bixin rasmi ah.",customerName:"Magaca macmiilka",customerNamePlaceholder:"Magacaaga",phone:"Telefoonka",pickup:"Meesha laga qaadayo",pickupPlaceholder:"Cinwaanka qaadista",destination:"Meesha la geynayo",destinationPlaceholder:"Cinwaanka gaarsiinta",itemDetails:"Faahfaahinta alaabta",itemPlaceholder:"Sharax alaabta",prepareOrder:"Diyaari Dalabka",cityHeading:"🚐 City Delivery",cargoHeading:"🚛 Heavy Cargo",cargoDetails:"Sharaxaadda xamuulka",cargoPlaceholder:"Nooca iyo miisaanka xamuulka",fastHeading:"🏍️ Fast Delivery",vehicleType:"Nooca gaadiidka",motorcycle:"Mooto",bicycle:"Baaskiil",ordersHeading:"📦 Dalabyadayda",ordersInfo:"Dalabyada lagu kaydiyey browser-kan ayaa halkan ka muuqanaya.",
+enterDistanceAndRate:"Fadlan geli masaafad iyo qiime halkii km oo sax ah.",estimatedFare:"Qiimaha qiyaasta ah: ",fillAll:"Fadlan buuxi dhammaan meelaha.",savedLocally:"Dalabka waxaa lagu kaydiyey qalabkan. Lambarka dalabka: ",notSent:" Weli looma dirin shirkadda.",noOrders:"Weli dalab laguma kaydin browser-kan.",orderNumber:"Lambarka dalabka: ",service:"Adeegga: ",date:"Taariikhda: ",pickupLabel:"Meesha laga qaadayo: ",destinationLabel:"Meesha la geynayo: ",vehicle:"Gaadiidka: "
+},
+am: {
+tagline:"ዘመናዊ የትራንስፖርት እና የማድረስ አገልግሎቶች",chooseLanguage:"ቋንቋ ይምረጡ:",
+home:"🏠 መነሻ",taxiNav:"🚕 ታክሲ",cityNav:"🚐 የከተማ ማድረስ",cargoNav:"🚛 ከባድ ጭነት",fastNav:"🏍️ ፈጣን ማድረስ",ordersNav:"📦 ትዕዛዞቼ",
+welcome:"ወደ Amaal Logistics እንኳን በደህና መጡ",welcomeText:"የሚፈልጉትን አገልግሎት ይምረጡ። መጓጓዣን እና ዕቃ ማድረስን ቀላል እናደርጋለን።",startOrder:"ትዕዛዝ ይጀምሩ",ourServices:"አገልግሎቶቻችን",
+taxiTitle:"ታክሲ",taxiDesc:"በርቀት መሠረት የሚሰላ የተሳፋሪ መጓጓዣ።",chooseTaxi:"ታክሲ ይምረጡ",cityTitle:"የከተማ ማድረስ",cityDesc:"በከተማ ውስጥ ዕቃዎችን ማድረስ።",orderDelivery:"ማድረስ ይዘዙ",cargoTitle:"ከባድ ጭነት",cargoDesc:"ለከባድ ጭነት የመጓጓዣ አገልግሎት።",orderCargo:"ጭነት ይዘዙ",fastTitle:"ፈጣን ማድረስ",fastDesc:"ለፈጣን ማድረስ ሞተር ሳይክሎች እና ብስክሌቶች።",orderFast:"ፈጣን ማድረስ ይዘዙ",
+taxiHeading:"🚕 ታክሲ ይዘዙ",taxiInstructions:"የጉዞ ርቀትን እና የአንድ ኪሎሜትር ዋጋን ያስገቡ።",distance:"ርቀት (ኪ.ሜ)",pricePerKm:"የአንድ ኪ.ሜ ዋጋ",calculate:"ዋጋ አስሉ",taxiNote:"ይህ ግምታዊ ዋጋ ነው። ከቀጥታ የዋጋ ወይም የክፍያ ስርዓት ጋር አልተገናኘም።",customerName:"የደንበኛ ስም",customerNamePlaceholder:"ስምዎ",phone:"ስልክ ቁጥር",pickup:"የሚነሳበት ቦታ",pickupPlaceholder:"የመነሻ አድራሻ",destination:"የሚደርስበት ቦታ",destinationPlaceholder:"የመድረሻ አድራሻ",itemDetails:"የዕቃ ዝርዝር",itemPlaceholder:"ዕቃውን ይግለጹ",prepareOrder:"ትዕዛዝ ያዘጋጁ",cityHeading:"🚐 የከተማ ማድረስ",cargoHeading:"🚛 ከባድ ጭነት",cargoDetails:"የጭነት መግለጫ",cargoPlaceholder:"የጭነቱ አይነት እና ክብደት",fastHeading:"🏍️ ፈጣን ማድረስ",vehicleType:"የተሽከርካሪ አይነት",motorcycle:"ሞተር ሳይክል",bicycle:"ብስክሌት",ordersHeading:"📦 ትዕዛዞቼ",ordersInfo:"በዚህ አሳሽ ውስጥ የተቀመጡ ትዕዛዞች እዚህ ይታያሉ።",
+enterDistanceAndRate:"እባክዎ ትክክለኛ ርቀት እና የኪሎሜትር ዋጋ ያስገቡ።",estimatedFare:"ግምታዊ ዋጋ: ",fillAll:"እባክዎ ሁሉንም መስኮች ይሙሉ።",savedLocally:"ትዕዛዙ በዚህ መሣሪያ ተቀምጧል። የትዕዛዝ ቁጥር: ",notSent:" ገና ወደ ኩባንያው አልተላከም።",noOrders:"በዚህ አሳሽ ውስጥ ምንም ትዕዛዝ አልተቀመጠም።",orderNumber:"የትዕዛዝ ቁጥር: ",service:"አገልግሎት: ",date:"ቀን: ",pickupLabel:"መነሻ: ",destinationLabel:"መድረሻ: ",vehicle:"ተሽከርካሪ: "
+},
+om: {
+tagline:"Tajaajila geejjibaa fi geessuu ammayyaa",chooseLanguage:"Afaan filadhu:",
+home:"🏠 Fuula jalqabaa",taxiNav:"🚕 Taaksii",cityNav:"🚐 Geessuu magaalaa",cargoNav:"🚛 Fe'umsaa ulfaataa",fastNav:"🏍️ Geessuu saffisaa",ordersNav:"📦 Ajaja koo",
+welcome:"Baga gara Amaal Logistics dhuftan",welcomeText:"Tajaajila barbaaddan filadhaa. Geejjibaa fi geessuu meeshaalee salphifna.",startOrder:"Ajaja jalqabi",ourServices:"Tajaajiloota keenya",
+taxiTitle:"Taaksii",taxiDesc:"Geejjiba imaltootaa gatii fageenya irratti hundaa'e.",chooseTaxi:"Taaksii filadhu",cityTitle:"Geessuu Magaalaa",cityDesc:"Meeshaalee fi oomishaalee magaalaa keessatti geessuu.",orderDelivery:"Geessuu ajaji",cargoTitle:"Fe'umsaa Ulfaataa",cargoDesc:"Geejjiba fe'umsaa ulfaataaf.",orderCargo:"Fe'umsaa ajaji",fastTitle:"Geessuu Saffisaa",fastDesc:"Motoorii fi biskileetii geessuu saffisaaf.",orderFast:"Geessuu saffisaa ajaji",
+taxiHeading:"🚕 Taaksii ajaji",taxiInstructions:"Fageenya fi gatii kiiloo meetira tokkoo galchi; gatii tilmaamaa argatta.",distance:"Fageenya (km)",pricePerKm:"Gatii km tokkoof",calculate:"Gatii shallagi",taxiNote:"Kun gatii tilmaamaa qofa. Sirna gatii kallattii ykn kaffaltii waliin hin walqabanne.",customerName:"Maqaa maamilaa",customerNamePlaceholder:"Maqaa kee",phone:"Lakkoofsa bilbilaa",pickup:"Bakka irraa fudhatamu",pickupPlaceholder:"Teessoo ka'umsaa",destination:"Bakka geessuu",destinationPlaceholder:"Teessoo gahumsaa",itemDetails:"Ibsa meeshaa",itemPlaceholder:"Meeshaa ibsi",prepareOrder:"Ajaja qopheessi",cityHeading:"🚐 Geessuu Magaalaa",cargoHeading:"🚛 Fe'umsaa Ulfaataa",cargoDetails:"Ibsa fe'umsaa",cargoPlaceholder:"Gosa fi ulfaatina fe'umsaa",fastHeading:"🏍️ Geessuu Saffisaa",vehicleType:"Gosa geejjibaa",motorcycle:"Motoorii",bicycle:"Biskileetii",ordersHeading:"📦 Ajajawwan koo",ordersInfo:"Ajajawwan biraawzari kana keessatti kuufaman asitti mul'atu.",
+enterDistanceAndRate:"Maaloo fageenya sirrii fi gatii km tokkoof galchi.",estimatedFare:"Gatii tilmaamaa: ",fillAll:"Maaloo bakka hunda guuti.",savedLocally:"Ajajni meeshaa kana irratti kuufameera. Lakkoofsa ajajaa: ",notSent:" Ammallee dhaabbatichaaf hin ergamne.",noOrders:"Biraawzari kana keessatti ajajni hin kuufamne.",orderNumber:"Lakkoofsa ajajaa: ",service:"Tajaajila: ",date:"Guyyaa: ",pickupLabel:"Bakka irraa fudhatamu: ",destinationLabel:"Bakka geessuu: ",vehicle:"Geejjiba: "
 }
-function calculateTaxi(){
-const km=Number(document.getElementById('taxiKm').value);
-const rate=Number(document.getElementById('taxiRate').value);
-if(km<=0||rate<0||document.getElementById('taxiRate').value===''){
-document.getElementById('taxiResult').textContent='Fadlan geli masaafada iyo qiimaha halkii km.';
-return;
+};
+
+let currentLanguage = localStorage.getItem("amaalLanguage") || "so";
+
+function t(key) {
+ return (translations[currentLanguage] && translations[currentLanguage][key]) ||
+        translations.en[key] || key;
 }
-document.getElementById('taxiResult').textContent='Qiimaha tusaalaha ah: '+(km*rate).toLocaleString()+' (lacagta deegaanka).';
+
+function changeLanguage(lang) {
+ if (!translations[lang]) lang = "en";
+ currentLanguage = lang;
+ localStorage.setItem("amaalLanguage", lang);
+ document.documentElement.lang = lang;
+ document.getElementById("languageSelect").value = lang;
+
+ document.querySelectorAll("[data-i18n]").forEach(el => {
+   const key = el.getAttribute("data-i18n");
+   if (t(key)) el.textContent = t(key);
+ });
+
+ document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+   el.placeholder = t(el.getAttribute("data-i18n-placeholder"));
+ });
+
+ renderOrders();
 }
-function saveOrder(type){
-const fields={
-city:['cityName','cityPhone','cityFrom','cityTo','cityItem'],
-cargo:['cargoName','cargoPhone','cargoFrom','cargoTo','cargoItem'],
-fast:['fastName','fastPhone','fastFrom','fastTo','fastItem']
-}[type];
-const vals=fields.map(id=>document.getElementById(id).value.trim());
-if(vals.some(v=>!v)){alert('Fadlan buuxi dhammaan meelaha.');return}
-const order={id:'AM'+Date.now().toString().slice(-8),type:type,values:vals,vehicle:type==='fast'?document.getElementById('fastVehicle').value:'',date:new Date().toLocaleString()};
-const orders=JSON.parse(localStorage.getItem('amaalOrders')||'[]');
-orders.unshift(order);
-localStorage.setItem('amaalOrders',JSON.stringify(orders));
-alert('Dalabka waxaa lagu kaydiyey qalabkan. Lambarka dalabka: '+order.id+'. Weli looma dirin shirkadda.');
-fields.forEach(id=>document.getElementById(id).value='');
+
+function showPage(id) {
+ document.querySelectorAll(".page").forEach(page => {
+   page.classList.remove("active");
+   page.style.display = "none";
+ });
+ const page = document.getElementById(id);
+ if (page) {
+   page.classList.add("active");
+   page.style.display = "block";
+ }
+ window.scrollTo(0, 0);
+ if (id === "track") renderOrders();
 }
-function renderOrders(){
-const orders=JSON.parse(localStorage.getItem('amaalOrders')||'[]');
-const box=document.getElementById('ordersList');
-if(!orders.length){box.textContent='Weli dalab laguma kaydin qalabkan.';return}
-box.innerHTML=orders.map(o=>'<div class="card" style="margin:10px 0;text-align:left"><b>Dalab: '+o.id+'</b><p>Qaybta: '+o.type+'</p><p>Taariikh: '+o.date+'</p><p>Meel laga qaadayo: '+o.values[2]+'</p><p>Meel la geynayo: '+o.values[3]+'</p></div>').join('');
+
+function calculateTaxi() {
+ const km = Number(document.getElementById("taxiKm").value);
+ const rateText = document.getElementById("taxiRate").value;
+ const rate = Number(rateText);
+ const result = document.getElementById("taxiResult");
+
+ if (!Number.isFinite(km) || km <= 0 || rateText === "" ||
+     !Number.isFinite(rate) || rate < 0) {
+   result.textContent = t("enterDistanceAndRate");
+   return;
+ }
+
+ result.textContent = t("estimatedFare") +
+   (km * rate).toLocaleString() + ".";
 }
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){
-window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+
+function saveOrder(type) {
+ const fieldSets = {
+   city: ["cityName", "cityPhone", "cityFrom", "cityTo", "cityItem"],
+   cargo: ["cargoName", "cargoPhone", "cargoFrom", "cargoTo", "cargoItem"],
+   fast: ["fastName", "fastPhone", "fastFrom", "fastTo", "fastItem"]
+ };
+ const fields = fieldSets[type];
+ const values = fields.map(id => document.getElementById(id).value.trim());
+
+ if (values.some(value => !value)) {
+   alert(t("fillAll"));
+   return;
+ }
+
+ const order = {
+   id: "AM" + Date.now().toString().slice(-8),
+   type: type,
+   values: values,
+   vehicle: type === "fast"
+     ? document.getElementById("fastVehicle").value : "",
+   date: new Date().toLocaleString()
+ };
+
+ const orders = JSON.parse(localStorage.getItem("amaalOrders") || "[]");
+ orders.unshift(order);
+ localStorage.setItem("amaalOrders", JSON.stringify(orders));
+
+ alert(t("savedLocally") + order.id + "." + t("notSent"));
+ fields.forEach(id => document.getElementById(id).value = "");
+}
+
+function renderOrders() {
+ const orders = JSON.parse(localStorage.getItem("amaalOrders") || "[]");
+ const box = document.getElementById("ordersList");
+
+ if (!orders.length) {
+   box.textContent = t("noOrders");
+   return;
+ }
+
+ box.replaceChildren();
+
+ orders.forEach(order => {
+   const card = document.createElement("div");
+   card.className = "card";
+   card.style.margin = "10px 0";
+   card.style.textAlign = "left";
+
+   const lines = [
+     t("orderNumber") + order.id,
+     t("service") + (order.type === "city" ? t("cityTitle") :
+       order.type === "cargo" ? t("cargoTitle") : t("fastTitle")),
+     t("date") + order.date,
+     t("pickupLabel") + order.values[2],
+     t("destinationLabel") + order.values[3]
+   ];
+
+   if (order.vehicle) {
+     lines.push(t("vehicle") +
+       (order.vehicle === "motorcycle" ? t("motorcycle") : t("bicycle")));
+   }
+
+   lines.forEach(line => {
+     const p = document.createElement("p");
+     p.textContent = line;
+     card.appendChild(p);
+   });
+
+   box.appendChild(card);
+ });
+}
+
+changeLanguage(currentLanguage);
+
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+ window.addEventListener("load", () => {
+   navigator.serviceWorker.register("./sw.js").catch(() => {});
+ });
 }
 </script></body>
 </html>
